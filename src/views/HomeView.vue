@@ -1,46 +1,40 @@
 <template>
   <div class="home">
-    <h2>Ref</h2>
-    <p>Hi, I'm {{ contactOne.name }}. This is my number {{ contactOne.number }}</p>
-    <button @click="handleClick">Click!</button>
-    <h2>Reactive</h2>
-    <p>Hi, I'm {{ contactTwo.name }}. This is my number {{ contactTwo.number }}</p>
-    <button @click="handleClickTwo">Click!</button>
+    <h1>Home</h1>
+    <!--    <div>{{ name }}</div>-->
+    <input type="text" v-model="search">
+    <div v-for="name in resultSearch" :key="name">
+      {{ name }}
+    </div>
   </div>
 </template>
 
 <script>
 
-import {reactive, ref} from "vue";
+import {computed, ref} from "vue";
 
 export default {
   name: 'HomeView',
   setup() {
-    const contactOne = ref({
-      name: 'Fakhry',
-      number: '0123456',
-    })
+    // const name = computed(() => {
+    //   return 'Fakhry';
+    // });
+    const search = ref('');
+    const names = ref([
+      'Katlyn Lehmann', 'Darwin Tremaine', 'Noriko Stgelais',
+      'Shawna Fairbank', 'Zachery Raap', 'Ahmad Urenda',
+      'Raymon Lafrance', 'Carolyn Bolander', 'Sharell Satcher',
+      'Annett Purcell'
+    ]);
 
-    const contactTwo = reactive({
-      name: 'Affan',
-      number: '0654321',
-    })
-
-    const handleClick = () => {
-      contactOne.value.name = "Linux";
-      contactOne.value.number = "007";
-    }
-
-    const handleClickTwo = () => {
-      contactTwo.name = "Arsene";
-      contactTwo.number = "001";
-    }
+    const resultSearch = computed(() => {
+      return names.value.filter((name) => name.includes(search.value));
+    });
 
     return {
-      contactOne,
-      contactTwo,
-      handleClick,
-      handleClickTwo,
+      names,
+      search,
+      resultSearch,
     }
   },
 }
