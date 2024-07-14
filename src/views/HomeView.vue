@@ -1,18 +1,31 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <p>Hi, I'm {{ name }}. This is my  number {{ number }}</p>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
 
 export default {
   name: 'HomeView',
-  components: {
-    HelloWorld
-  }
+  setup() {
+    // console.log('setup')
+    // Tidak reaktif
+    const name = "Fakhry";
+    const number = "01234";
+
+    return {
+      // name: name,
+      // number: number,
+      name,
+      number,
+    }
+  },
+  // created() {
+  //   console.log('created')
+  // },
+  // mounted() {
+  //   console.log('mounted')
+  // }
 }
 </script>
