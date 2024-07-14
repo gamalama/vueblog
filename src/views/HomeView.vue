@@ -1,31 +1,46 @@
 <template>
   <div class="home">
-    <p>Hi, I'm {{ name }}. This is my number {{ number }}</p>
+    <h2>Ref</h2>
+    <p>Hi, I'm {{ contactOne.name }}. This is my number {{ contactOne.number }}</p>
     <button @click="handleClick">Click!</button>
-    <button @click="number++">Increment</button>
-    <input type="text" v-model="name">
+    <h2>Reactive</h2>
+    <p>Hi, I'm {{ contactTwo.name }}. This is my number {{ contactTwo.number }}</p>
+    <button @click="handleClickTwo">Click!</button>
   </div>
 </template>
 
 <script>
 
-import {ref} from "vue";
+import {reactive, ref} from "vue";
 
 export default {
   name: 'HomeView',
   setup() {
-    const name = ref("Fakhry");
-    const number = ref("01234");
+    const contactOne = ref({
+      name: 'Fakhry',
+      number: '0123456',
+    })
+
+    const contactTwo = reactive({
+      name: 'Affan',
+      number: '0654321',
+    })
 
     const handleClick = () => {
-      name.value = "Linux";
-      number.value = "007";
+      contactOne.value.name = "Linux";
+      contactOne.value.number = "007";
+    }
+
+    const handleClickTwo = () => {
+      contactTwo.name = "Arsene";
+      contactTwo.number = "001";
     }
 
     return {
-      name,
-      number,
+      contactOne,
+      contactTwo,
       handleClick,
+      handleClickTwo,
     }
   },
 }
