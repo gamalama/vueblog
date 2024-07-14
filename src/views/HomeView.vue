@@ -1,31 +1,33 @@
 <template>
   <div class="home">
-    <p>Hi, I'm {{ name }}. This is my  number {{ number }}</p>
+    <p ref="p">Hi, I'm {{ name }}. This is my number {{ number }}</p>
+    <button @click="handleClick">Click!</button>
   </div>
 </template>
 
 <script>
 
+import {ref} from "vue";
+
 export default {
   name: 'HomeView',
   setup() {
-    // console.log('setup')
-    // Tidak reaktif
+    const p = ref(null);
     const name = "Fakhry";
     const number = "01234";
 
+    const handleClick = () =>{
+      console.log(p, p.value);
+      p.value.classList.add('paragraph');
+      p.value.textContent = "hi, Codepolitan"
+    }
+
     return {
-      // name: name,
-      // number: number,
       name,
       number,
+      p,
+      handleClick,
     }
   },
-  // created() {
-  //   console.log('created')
-  // },
-  // mounted() {
-  //   console.log('mounted')
-  // }
 }
 </script>
