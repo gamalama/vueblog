@@ -1,7 +1,9 @@
 <template>
   <div class="home">
-    <p ref="p">Hi, I'm {{ name }}. This is my number {{ number }}</p>
+    <p>Hi, I'm {{ name }}. This is my number {{ number }}</p>
     <button @click="handleClick">Click!</button>
+    <button @click="number++">Increment</button>
+    <input type="text" v-model="name">
   </div>
 </template>
 
@@ -12,20 +14,17 @@ import {ref} from "vue";
 export default {
   name: 'HomeView',
   setup() {
-    const p = ref(null);
-    const name = "Fakhry";
-    const number = "01234";
+    const name = ref("Fakhry");
+    const number = ref("01234");
 
-    const handleClick = () =>{
-      console.log(p, p.value);
-      p.value.classList.add('paragraph');
-      p.value.textContent = "hi, Codepolitan"
+    const handleClick = () => {
+      name.value = "Linux";
+      number.value = "007";
     }
 
     return {
       name,
       number,
-      p,
       handleClick,
     }
   },
