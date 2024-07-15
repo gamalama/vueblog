@@ -6,19 +6,17 @@
     <div v-for="name in resultSearch" :key="name">
       {{ name }}
     </div>
+    <button @click="handleClick">Stop</button>
   </div>
 </template>
 
 <script>
 
-import {computed, ref} from "vue";
+import {computed, ref, watch, watchEffect} from "vue";
 
 export default {
   name: 'HomeView',
   setup() {
-    // const name = computed(() => {
-    //   return 'Fakhry';
-    // });
     const search = ref('');
     const names = ref([
       'Katlyn Lehmann', 'Darwin Tremaine', 'Noriko Stgelais',
@@ -27,14 +25,28 @@ export default {
       'Annett Purcell'
     ]);
 
+    const stop = watch(search, () => {
+      console.log('fungsi watch berjalan');
+    });
+
+    const stopEffect = watchEffect(() => {
+      console.log('watcheffect berjalan', search.value);
+    });
+
     const resultSearch = computed(() => {
       return names.value.filter((name) => name.includes(search.value));
     });
+
+    const handleClick = () => {
+      stop();
+      stopEffect();
+    }
 
     return {
       names,
       search,
       resultSearch,
+      handleClick,
     }
   },
 }
